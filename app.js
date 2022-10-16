@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'test') {
   nodeCron.schedule('0 10 * * *', () => {
     // 这里cron是每天上午10点整执行一次
     main()
-    console.log('running a task every minute');
+    console.log('running a task');
   });
 }
 
