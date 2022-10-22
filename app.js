@@ -4,11 +4,7 @@ const dayjs = require('dayjs')
 const nodeCron = require("node-cron")
 
 const run = (e) => {
-  browser.run().then(info => {
-    const content = Object.entries(info).flat(Infinity).map(item => {
-      if (item.indexOf('<') > -1) return item
-      return `<br/><b>${item} 推荐：</b>`
-    })
+  browser.run().then(content => {
     const date = dayjs().format('YYYY/MM/DD HH:mm:ss')
     console.log(`running at ${date}`);
     sendMail(date, content.join('<br/>'))
