@@ -4,7 +4,7 @@ const dayjs = require('dayjs')
 const nodeCron = require("node-cron")
 
 const run = (e) => {
-  browser.run().then(arr => {
+  browser.run().then((arr=[]) => {
     const content = arr.flat(Infinity)
     const date = dayjs().format('YYYY/MM/DD HH:mm:ss')
     console.log(`running at ${date}`);
