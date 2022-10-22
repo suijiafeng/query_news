@@ -1,25 +1,26 @@
-const juejin = require('./lib/juejin')
-const segmentfault = require('./lib/segmentfault')
+const browser = require('./lib/browser')
 const sendMail = require('./lib/mailer')
 const dayjs = require('dayjs')
 const nodeCron = require("node-cron")
 
-async function main() {
-  const content1 = await juejin()
-  const content2 = await segmentfault()
-  const content = ['<b>juejin推荐:</b>', ...content1, '<br/><b>segmentfault推荐:</b>', ...content2].join('<br/>')
-  const date = dayjs().format('YYYY/MM/DD HH:mm:ss')
-  sendMail(date, content)
+const run = (e) => {
+  browser.run().then(info => {
+    const content = Object.entries(info).flat(Infinity).map(item => {
+      if (item.indexOf('<') > -1) return item
+      return `<br/><b>${item} 推荐：</b>`
+    })
+    const date = dayjs().format('YYYY/MM/DD HH:mm:ss')
+    console.log(`running at ${date}`);
+    sendMail(date, content.join('<br/>'))
+  }).catch(err => {
+    console.log('err', err)
+  })
 }
 
-// // https://github.com/node-cron/node-cron 
 if (process.env.NODE_ENV === 'test') {
-  main()
+  run()
 } else {
-  nodeCron.schedule('0 10 * * *', () => {
-    // 这里cron是每天上午10点整执行一次
-    main()
-    console.log('running a task');
-  });
+    // 生产环境
+  nodeCron.schedule('55 21,11 * * *', run);
+  console.log('schedule runing')
 }
-
