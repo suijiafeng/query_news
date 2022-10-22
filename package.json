@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test node app.js",
-    "pm2": "pm2 start app.js"
+    "start": "node app.js",
+    "start:pm2": "pm2 start app.js",
+    "test": "cross-env NODE_ENV=test node app.js"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,7 @@
     "dayjs": "^1.11.5",
     "node-cron": "^3.0.2",
     "nodemailer": "^6.8.0",
+    "playwright": "^1.27.1",
     "pm2": "^5.2.2"
   }
 }
