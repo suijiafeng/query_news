@@ -21,6 +21,7 @@ if (process.env.NODE_ENV === 'test') {
   run()
 } else {
     // 生产环境
+    // 这里设置定时任务 https://cron.qqe2.com/
   nodeCron.schedule('55 21,11 * * *', run);
   console.log('schedule runing')
 }

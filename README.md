@@ -16,11 +16,13 @@ step 2：执行邮件程序
 ```
 npm run test   // 测试程序可用性
 
-npm run pm2   // 正式运行程序
+npm run start  // 正式运行程序
+
+npm run start:pm2 // 用pm2正式运行程序
 
 ```
 
-step 3：执行成功后，每天上午10:00将会获取 juejin 、segmentfault 前端最新文章，并邮件形式发送到您指定的邮箱。
+step 3：执行成功后，将会在您指定时间（cron表达式设置）从 juejin 、segmentfault 等网站获取前端最新文章，并邮件形式发送到您指定的邮箱。
 
 
 
