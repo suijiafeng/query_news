@@ -3,12 +3,14 @@ const sendMail = require('./lib/mailer')
 const dayjs = require('dayjs')
 const nodeCron = require("node-cron")
 
-const run = (e) => {
+const run = () => {
+  const starting = dayjs().format('YYYY/MM/DD HH:mm:ss')
+  console.log("starting",starting)
   browser.run().then((arr=[]) => {
     const content = arr.flat(Infinity)
-    const date = dayjs().format('YYYY/MM/DD HH:mm:ss')
-    console.log(`running at ${date}`);
-    sendMail(date, content.join('<br/>'))
+    const running  = dayjs().format('YYYY/MM/DD HH:mm:ss')	  
+    console.log('running', running);
+    sendMail('每日一阅', content.join('<br/>'))
   }).catch(err => {
     console.log('err', err)
   })
